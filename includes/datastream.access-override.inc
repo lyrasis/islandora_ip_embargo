@@ -2,7 +2,7 @@
 
 /**
  * @file
- * TN datastream access override callback.
+ * TN or RELS-EXT datastream access override callback.
  */
 
 /**
@@ -12,8 +12,8 @@ function islandora_ip_embargo_thumbnail_access_callback($op, AbstractDatastream 
   module_load_include('inc', 'islandora_ip_embargo', 'includes/utilities');
   $restrict_access = islandora_ip_embargo_restrict_access($datastream->parent->id);
   if ($restrict_access) {
-    // If we're looking for a thumbnail let it through; otherwise, deny.
-    return $datastream->id == 'TN';
+    // If we're looking for a thumbnail or RELS-EXT file let it through; otherwise, deny.
+    return $datastream->id == 'TN' || $datastream->id == 'RELS-EXT';
   }
 
   // If we found no issues we let things proceed.
